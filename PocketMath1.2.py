@@ -6,7 +6,8 @@ class Application(tk.Frame):
 
     line = ''
     def __init__(self, master=None):
-        tk.Frame.__init__(self, master)
+        tk.Heading = 'PocketMath'
+        tk.Frame.__init__(self, master, borderwidth = 8, relief = 'groove', bg = 'powder blue')
         self.grid()
         self.createWidgets()
 
@@ -28,10 +29,8 @@ class Application(tk.Frame):
                     line = ''
             else:
                 self.lblOutput['text'] = self.lblOutput['text'] + evt.widget['text']
+         
                 
-                
-                
-        
     def __btnCreate(self, lbl, rownum, columnnum):
         btn = tk.Button(self, text = lbl, width = 5, height = 2, borderwidth = 2, relief = 'raised' )
         btn.grid(row = rownum, column = columnnum)
