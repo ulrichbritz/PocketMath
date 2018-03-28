@@ -1,7 +1,7 @@
 import tkinter as tk
 from functools import partial
 
-    
+#start    
 class Application(tk.Frame):
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
