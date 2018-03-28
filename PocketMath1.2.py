@@ -1,34 +1,43 @@
 import tkinter as tk
 from functools import partial
 
-#start    
+#start
 class Application(tk.Frame):
 
-    line = ''
     def __init__(self, master=None):
         tk.Heading = 'PocketMath'
         tk.Frame.__init__(self, master, borderwidth = 8, relief = 'groove', bg = 'powder blue')
         self.grid()
         self.createWidgets()
+        self.line = ''
 
     def __btnClick(self, evt):
         if self.lblOutput['text'] == 'Error':
+            self.line = ''
             self.lblOutput['text'] = ''
         if evt.widget['text'] == 'AC':
-           self.lblOutput['text'] = ''
-           line = ''
+            self.line = ''
+            self.lblOutput['text'] = ''
         else:
             if evt.widget['text'] == '=':
-                line =''
                 try:
-                    line = self.lblOutput['text']
-                    line = str(eval(line))
-                    self.lblOutput['text'] = line
+                    self.line = str(eval(self.line))
+                    self.lblOutput['text'] = self.line
                 except:
                     self.lblOutput['text'] = 'Error'
-                    line = ''
+                    self.line = ''
             else:
-                self.lblOutput['text'] = self.lblOutput['text'] + evt.widget['text']
+                if evt.widget['text'] == '+' or evt.widget['text'] == '-' or evt.widget['text'] == '*' or evt.widget['text'] =='/':
+                    try:
+                        self.line = str(eval(self.line))
+                        self.lblOutput['text'] = self.line
+                        self.line = self.line + evt.widget['text']
+                    except:
+                        pass
+                else:
+                    self.lblOutput['text'] = ''
+                    self.line = self.line + evt.widget['text']
+                    self.lblOutput['text'] = self.lblOutput['text'] + evt.widget['text']
          
                 
     def __btnCreate(self, lbl, rownum, columnnum):
