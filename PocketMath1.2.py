@@ -3,21 +3,29 @@ from functools import partial
 
 #start    
 class Application(tk.Frame):
+
+    line = ''
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
         self.grid()
         self.createWidgets()
 
     def __btnClick(self, evt):
+        if self.lblOutput['text'] == 'Error':
+            self.lblOutput['text'] = ''
         if evt.widget['text'] == 'AC':
            self.lblOutput['text'] = ''
+           line = ''
         else:
             if evt.widget['text'] == '=':
-                if bool(eval(self.lblOutput['text'])) == 'false':
+                line =''
+                try:
+                    line = self.lblOutput['text']
+                    line = str(eval(line))
+                    self.lblOutput['text'] = line
+                except:
                     self.lblOutput['text'] = 'Error'
-                else:
-                    ans = eval(self.lblOutput['text'])
-                    self.lblOutput['text'] = str(ans)  
+                    line = ''
             else:
                 self.lblOutput['text'] = self.lblOutput['text'] + evt.widget['text']
                 
