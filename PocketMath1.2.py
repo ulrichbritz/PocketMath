@@ -36,14 +36,22 @@ class Application(tk.Frame):
                     self.top = ''
             else:
                 if evt.widget['text'] == '+' or evt.widget['text'] == '-' or evt.widget['text'] == '*' or evt.widget['text'] =='/':
-                    try:
+                    if self.line.endswith('+') or self.line.endswith('-') or self.line.endswith('*') or self.line.endswith('/'):
+                        self.line = ''
                         self.top = self.top + evt.widget['text']
                         self.lblTop['text'] = self.top
-                        self.line = str(eval(self.line))
-                        self.lblOutput['text'] = self.line
-                        self.line = self.line + evt.widget['text']
-                    except:
-                        pass   
+                        self.top = ''
+                        self.lblOutput['text'] = 'Error'
+                        
+                    else:
+                        try:
+                            self.top = self.top + evt.widget['text']
+                            self.lblTop['text'] = self.top
+                            self.line = str(eval(self.line))
+                            self.lblOutput['text'] = self.line
+                            self.line = self.line + evt.widget['text']
+                        except:
+                            pass   
                 else:
                     if self.line.endswith('+') or self.line.endswith('-') or self.line.endswith('*') or self.line.endswith('/'):
                         self.lblOutput['text'] = '' 
@@ -68,7 +76,7 @@ class Application(tk.Frame):
         #buttons 0-9, +, -, *, /, =, AC
         row = 4
         column = -1
-        for i in ['0', '1','2','3','4','5','6','7','8','9','.', '+', '-', '*', '/', '=', 'AC']:
+        for i in ['0', '1','2','3','4','5','6','7','8','9','.', '+', '-', '*', '/', '=','AC']:
             if column == 3:
                 column = 0
                 row = row + 1
