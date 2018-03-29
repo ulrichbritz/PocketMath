@@ -15,15 +15,18 @@ class Application(tk.Frame):
         if self.lblOutput['text'] == 'Error':
             self.line = ''
             self.lblOutput['text'] = ''
+            self.lblLine['text'] = self.line
         if evt.widget['text'] == 'AC':
             self.line = ''
             self.lblOutput['text'] = ''
         else:
             if evt.widget['text'] == '=':
                 try:
+                    self.lblLine['text'] = self.line
                     self.line = str(eval(self.line))
                     self.lblOutput['text'] = self.line
                 except:
+                    self.lblLine['text'] = self.line
                     self.lblOutput['text'] = 'Error'
                     self.line = ''
             else:
@@ -32,12 +35,14 @@ class Application(tk.Frame):
                         self.line = str(eval(self.line))
                         self.lblOutput['text'] = self.line
                         self.line = self.line + evt.widget['text']
+                        self.lblLine['text'] = self.line
                     except:
                         pass   
                 else:
                     if self.line.endswith('+') or self.line.endswith('-') or self.line.endswith('*') or self.line.endswith('/'):
                         self.lblOutput['text'] = ''
                     self.line = self.line + evt.widget['text']
+                    self.lblLine['text'] = self.line
                     self.lblOutput['text'] = self.lblOutput['text'] + evt.widget['text']
          
                 
@@ -50,7 +55,7 @@ class Application(tk.Frame):
         self.lblOutput = tk.Label(self, text = '', bg = 'light grey', font = 20, height = 3, borderwidth = 3, relief = 'sunken', width=20)
         self.lblOutput.grid(column=0, row=1 , columnspan = 4, rowspan =3)
 
-        self.lblLine = tk.Label(self, text = '', bg = 'light grey', font = 12, height = 2, borderwidth = 3, relief = 'sunken', width=20)
+        self.lblLine = tk.Label(self, text = '', bg = 'light grey', font = 5, height = 2, borderwidth = 3, relief = 'sunken',fg = 'grey', width=20)
         self.lblLine.grid(column=0, row=0 , columnspan = 4, rowspan =1)
         
         #buttons 0-9, +, -, *, /, =, AC
