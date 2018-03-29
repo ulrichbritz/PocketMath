@@ -26,8 +26,8 @@ class Application(tk.Frame):
             if evt.widget['text'] == '=':
                 try:
                     self.lblTop['text'] = self.top
-                    #self.lblLine['text'] = self.line
                     self.line = str(eval(self.line))
+                    self.top = self.line
                     self.lblOutput['text'] = self.line
                 except:
                     self.lblTop['text'] = self.top
@@ -46,7 +46,7 @@ class Application(tk.Frame):
                         pass   
                 else:
                     if self.line.endswith('+') or self.line.endswith('-') or self.line.endswith('*') or self.line.endswith('/'):
-                        self.lblOutput['text'] = ''
+                        self.lblOutput['text'] = '' 
                     self.top = self.top + evt.widget['text']
                     self.line = self.line + evt.widget['text']
                     self.lblTop['text'] = self.top
