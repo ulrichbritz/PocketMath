@@ -33,9 +33,10 @@ class Application(tk.Frame):
                         self.lblOutput['text'] = self.line
                         self.line = self.line + evt.widget['text']
                     except:
-                        pass
+                        pass   
                 else:
-                    self.lblOutput['text'] = ''
+                    if self.line.endswith('+') or self.line.endswith('-') or self.line.endswith('*') or self.line.endswith('/'):
+                        self.lblOutput['text'] = ''
                     self.line = self.line + evt.widget['text']
                     self.lblOutput['text'] = self.lblOutput['text'] + evt.widget['text']
          
@@ -47,10 +48,13 @@ class Application(tk.Frame):
 
     def createWidgets(self):
         self.lblOutput = tk.Label(self, text = '', bg = 'light grey', font = 20, height = 3, borderwidth = 3, relief = 'sunken', width=20)
-        self.lblOutput.grid(column=0, row=0 , columnspan = 4, rowspan =3)
+        self.lblOutput.grid(column=0, row=1 , columnspan = 4, rowspan =3)
+
+        self.lblLine = tk.Label(self, text = '', bg = 'light grey', font = 12, height = 2, borderwidth = 3, relief = 'sunken', width=20)
+        self.lblLine.grid(column=0, row=0 , columnspan = 4, rowspan =1)
         
         #buttons 0-9, +, -, *, /, =, AC
-        row = 3
+        row = 4
         column = -1
         for i in ['0', '1','2','3','4','5','6','7','8','9','.', '+', '-', '*', '/', '=', 'AC']:
             if column == 3:
